@@ -19,7 +19,7 @@ int main(void)
 
 int shell_sort(int *data, int size)
 {
-	int i = 0, j = 0, z = 0;
+	int i = 0, j = 0, k = 0, z = 0;
 	int temp = 0;
 	int incre = 0;
 	
@@ -27,21 +27,22 @@ int shell_sort(int *data, int size)
 
 	for(incre = size/2; incre > 0; incre /= 2) {
 		printf("incre = %d\n",incre);
-		for(i = incre; i < size; i++) {	
-			for(j = i - incre; j >= 0; j-=incre) {
-				if(data[j] > data[j + incre]) {
-					temp = data[j];
-					data[j] = data[j+incre];
-					data[j+incre] = temp;
-				
-				}	
-				//debug
-				for(z = 0; z < size; z++) {
-					printf("%d ",data[z]);
-				}
-                		printf("\n");
-				
+		for(i = 0; i < incre; i++) {	
+			for(j = i + incre; j < size; j+=incre) {
+				temp = data[j];
+				k = j - incre;
+				while(k >=0 && data[k] > temp) {
+					data[k + incre] = data[k];
+					k -= incre;
+				}		
+				data[k + incre] = temp;		
+			}	
+			//debug
+			for(z = 0; z < size; z++) {
+				printf("%d ",data[z]);
 			}
+			printf("\n");	
+			
 		}
 	}
 }
