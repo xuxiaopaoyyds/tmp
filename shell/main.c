@@ -27,16 +27,16 @@ int shell_sort(int *data, int size)
 
 	for(incre = size/2; incre > 0; incre /= 2) {
 		printf("incre = %d\n",incre);
-		for(i = 0; i < incre; i++) {	
-			for(j = i + incre; j < size; j+=incre) {
-				temp = data[j];
-				k = j - incre;
-				while(k >=0 && data[k] > temp) {
-					data[k + incre] = data[k];
-					k -= incre;
-				}		
-				data[k + incre] = temp;		
-			}	
+		for(i = incre; i < size; i++) {	
+			temp = data[i];
+			for(j = i; j >= incre; j -= incre) {
+				if(temp < data[j - incre]) {
+					data[j] = data[j-incre];
+				} else {
+					break;
+				}
+			}
+			data[j] = temp;
 			//debug
 			for(z = 0; z < size; z++) {
 				printf("%d ",data[z]);
